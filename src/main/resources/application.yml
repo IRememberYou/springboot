@@ -54,3 +54,7 @@ book:
   pinyin: sanguoyanyi
 
 
+#常量配置
+filepath: /Users/pinan/Downloads/springboot/src/file/
+
+

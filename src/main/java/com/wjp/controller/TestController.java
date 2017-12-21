@@ -74,22 +74,6 @@ public class TestController {
     @Autowired
     FileMangerRepostiory fileMangerRepostiory;
 
-//    @RequestMapping(method = RequestMethod.POST, path = "/upload")
-//    @ResponseBody
-//    public String upload(@RequestPart("file") MultipartFile file) {
-//        try {
-//            System.out.println("上传文件地带");
-//            String fileUrl = "/Users/pinan/Downloads/project/springboot/src/file/" + file.getOriginalFilename();
-//            fileMangerRepostiory.save(new FileManger(fileUrl));
-//            FileUtils.writeByteArrayToFile(new File(fileUrl), file.getBytes());
-//            return "upload success";
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return "upload error+\n" + e.toString();
-//        }
-//    }
-
-
     @RequestMapping("/gouploadui")
     public String gouploadui(ModelMap map) {
         List<FileManger> all = fileMangerRepostiory.findAll();
@@ -97,37 +81,4 @@ public class TestController {
         return "upload";
     }
 
-//    @RequestMapping(value = "/testDownload")
-//    @ResponseBody
-//    public String testDownload(@RequestParam("fileName") String fileName, HttpServletResponse res) {
-//        res.setHeader("content-type", "application/octet-stream");
-//        res.setContentType("application/octet-stream");
-//        res.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-//        res.setHeader("filename", fileName);
-//        try {
-//            String fileUrl = "/Users/pinan/Downloads/project/springboot/src/file/" + fileName;
-//            FileUtils.copyFile(new File(fileUrl), res.getOutputStream());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return "download error";
-//        }
-//        return "download success";
-//    }
-
-
-//    @RequestMapping(value = "/img")
-//    public void img(HttpServletResponse res) {
-//        String fileName = "1513580137223..jpg";
-//
-//        res.setHeader("content-type", "application/octet-stream");
-//        res.setContentType("application/octet-stream");
-//        res.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-//        res.setHeader("filename", fileName);
-//        try {
-//            String fileUrl = "/Users/pinan/Downloads/project/springboot/src/file/" + fileName;
-//            FileUtils.copyFile(new File(fileUrl), res.getOutputStream());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

@@ -1,11 +1,11 @@
 package com.wjp.controller;
 
-import com.wjp.base.Constan;
 import com.wjp.entity.FileManger;
 import com.wjp.repository.FileMangerRepostiory;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +26,10 @@ import java.util.Enumeration;
  */
 @Controller
 public class FileController {
+    //通过注解获取.yml配置文件的值
+    @Value("${filepath}")
+    private String filepath;
+
     @Autowired
     FileMangerRepostiory fileMangerRepostiory;
 
@@ -40,6 +44,10 @@ public class FileController {
         }
         for (MultipartFile file : files) {
             //从数据库中查询是否存在
+            String filename = file.getOriginalFilename();
+            if (filename == null || filename.equals("")) {
+                continue;
+            }
             FileManger serverFile = fileMangerRepostiory.findByFileurl(file.getOriginalFilename());
             if (serverFile != null) {
                 return "shang chuan shi bai ,fu wu qi shang yi cun zai";
@@ -52,8 +60,9 @@ public class FileController {
     }
 
     private boolean saveFile(MultipartFile file) {
-        String filePath = Constan.LOCAL_FILE_URL + file.getOriginalFilename();
+        String filePath = filepath + file.getOriginalFilename();
         try {
+            System.out.println(filePath);
             file.transferTo(new File(filePath));
             return true;
         } catch (IOException e) {
@@ -61,29 +70,6 @@ public class FileController {
             return false;
         }
     }
-
-//    /**
-//     *
-//     */
-//    @RequestMapping(value = "/download", method = RequestMethod.GET)
-//    @ResponseBody
-//    public String download(@RequestParam("fileName") String fileName, HttpServletResponse res) throws IOException {
-//        FileManger file = fileMangerRepostiory.findByFileurl(fileName);
-//        if (file != null) {
-//            String fileUrl = Constan.LOCAL_FILE_URL + fileName;
-//            //定义输出类型
-//            res.setContentType("application/octet-stream;charset=utf-8");
-//            //兼容浏览器
-//            res.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-//            //传递文件名
-//            res.setHeader("filename", fileName);
-//            FileUtils.copyFile(new File(fileUrl), res.getOutputStream());
-//            return "xia zai cheng gong";
-//        } else {
-//            return "wen jian bu cun zai";
-//        }
-//    }
-
 
     /**
      * 文件下载
@@ -114,7 +100,7 @@ public class FileController {
             res.setContentType("application/octet-stream;charset=utf-8");
             res.setHeader("filename", fileName);
             //文件路径
-            fileName = Constan.LOCAL_FILE_URL + File.separator + fileName;
+            fileName = filepath + File.separator + fileName;
             outputStream = res.getOutputStream();
             File file = new File(fileName);
             FileUtils.copyFile(file, outputStream);
