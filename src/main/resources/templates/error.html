@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>统一异常处理</title>
+</head>
+<body>
+<div>错误页面：</div>
+<br/>
+<h1>Error Handler </h1>
+<div th:text="${url}"/>
+<div th:text="${exception.message}"/>
+<br/>
+</body>
+</html>

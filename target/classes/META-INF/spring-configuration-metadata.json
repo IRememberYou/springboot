@@ -1,0 +1,27 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.wjp.bean.BookBean",
+      "name": "book",
+      "type": "com.wjp.bean.BookBean"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.wjp.bean.BookBean",
+      "name": "book.author",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.wjp.bean.BookBean",
+      "name": "book.name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.wjp.bean.BookBean",
+      "name": "book.pinyin",
+      "type": "java.lang.String"
+    }
+  ]
+}

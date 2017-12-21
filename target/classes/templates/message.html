@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <script>
+
+        function first() {
+            var currNo = document.getElementById("pagenum").innerHTML;
+            currNo = currNo - 1;
+            alert(currNo);
+        }
+    </script>
+</head>
+<body>
+<center>消息列表<br/>
+    <table border="1">
+        <tr>
+            <td>id</td>
+            <td>名字</td>
+            <td>消息</td>
+        </tr>
+        <p th:each="message:${messages}">
+            <tr>
+                <td th:text="${message.id}">ID</td>
+                <td th:text="${message.name}">姓名</td>
+                <td th:text="${message.msg}">消息</td>
+            </tr>
+        </p>
+    </table>
+    <div id="pagenum" th:text="${pageNum}"/>
+    <div>
+        <span onclick="first()">首页</span>
+        <span onclick="up()">上一页</span>
+        <span onclick="down()">下一页</span>
+    </div>
+    <span th:object="${pageNum}">
+        <p th:text="#{object}"/>
+    </span>
+</center>
+</body>
+</html>

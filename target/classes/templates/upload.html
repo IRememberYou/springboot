@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<form action="/upload" enctype="multipart/form-data" method="post">
+    <input type="file" name="file"/>
+    <input type="submit" value="上传"/>
+</form>
+<p><a th:href="@{/goMessage(pageNow=2,pageSize=3)}">尾页</a></p>
+<span th:each="file:${files}">
+<p th:text="${file.fileurl}"/>
+<a th:href="@{/download(fileName=${file.fileurl})}">点击下载</a>
+</span>
+</body>
+</html>

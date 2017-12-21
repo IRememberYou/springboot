@@ -1,0 +1,55 @@
+spring:
+  #配置版本
+  profiles:
+    active: prod
+  #配置数据库
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: admin
+  #配置jpa
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  #配置http
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    multipart:
+      max-file-size: 100Mb
+      max-request-size: 10Mb
+
+  messages:
+    encoding: UTF-8
+  #访问 static 文件夹下的目录
+  mvc:
+    static-path-pattern: /static/**
+    view:
+      prefix: /templates
+  #配置模板,使controller 能够访问到 html 页面
+  thymeleaf:
+    content-type: text/html
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    check-template: true
+    check-template-location: true
+    mode: HTML5
+    cache: false
+  #配置工具(热部署)
+  devtools:
+    restart:
+      exclude: static/**,public/**,templates/**
+      enabled: true
+      additional-paths: src/main/java
+
+book:
+  author: 罗贯中
+  name: 三国演义
+  pinyin: sanguoyanyi
+
+
