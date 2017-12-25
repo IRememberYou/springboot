@@ -3,9 +3,12 @@ package com.wjp.controller;
 import com.wjp.entity.UserForm;
 import com.wjp.server.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by pinan on 2017/12/12.
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserLoginController {
     @Autowired
     LoginService loginService;
-
 
     @RequestMapping("/login")
     public String login(UserForm userForm, ModelMap map) {
@@ -44,13 +46,22 @@ public class UserLoginController {
         }
     }
 
-    @RequestMapping("/index")
-    public String index() {
-        return "login";
-    }
+    @Autowired
+    JavaMailSender javaMailSender;
 
-    @RequestMapping("goregistui")
-    public String goregistui() {
-        return "regist";
+    //发送邮件部分
+    @RequestMapping("/sendMessage")
+    @ResponseBody
+    public String sendMail() {
+        System.out.println("正在发送邮件");
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("wjp1000@yeah.net");
+        message.setTo("1504522283@qq.com");
+        message.setSubject("主题:简单的邮件");
+        message.setText("测试数据");
+        System.out.println("信息组装完毕");
+        javaMailSender.send(message);
+        System.out.println("发送结束");
+        return "发送成功";
     }
 }

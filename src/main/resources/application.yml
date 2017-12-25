@@ -45,8 +45,20 @@ spring:
       exclude: static/**,public/**,templates/**
       enabled: true
       additional-paths: src/main/java
-
-
+  #发送邮件的配置
+  mail:
+    host: smtp.yeah.net
+    username: wjp1000@yeah.net
+    password: qwe123
+#    default-encoding: UTF-8
+    port: 465
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
 
 book:
   author: 罗贯中
